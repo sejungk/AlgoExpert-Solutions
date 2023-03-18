@@ -8,8 +8,8 @@ function subarraySort(array) {
 
 
       if (traverse < currNum) {
-          first = Math.min(first, i);
-          last = Math.max(last, j);
+        first = Math.min(first, i);
+        last = Math.max(last, j);
       }
     }
   }
