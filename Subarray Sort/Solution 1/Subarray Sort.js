@@ -5,8 +5,6 @@ function subarraySort(array) {
     let currNum = array[i];
     for (let j = i + 1; j < array.length; j++) {
       let traverse = array[j];
-
-
       if (traverse < currNum) {
         first = Math.min(first, i);
         last = Math.max(last, j);
