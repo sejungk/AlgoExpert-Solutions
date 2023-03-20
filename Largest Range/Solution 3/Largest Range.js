@@ -9,8 +9,6 @@ function largestRange(array) {
 
 
   for (const num of array) {
-    let startingIdx = num;
-    let endingIdx = num;
     
     if (nums[num] === true) {
       nums[num] = false;
@@ -21,13 +19,11 @@ function largestRange(array) {
       while (left in nums) {
         nums[left] = false;
         currLength++;
-        startingIdx = left;
         left -= 1;
       }
       while (nums[right]) {
         nums[right] = false;
         currLength++;
-        endingIdx = right;
         right += 1;
       }
 
