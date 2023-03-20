@@ -9,7 +9,6 @@ function largestRange(array) {
 
 
   for (const num of array) {
-    
     if (nums[num] === true) {
       nums[num] = false;
       let currLength = 1;
