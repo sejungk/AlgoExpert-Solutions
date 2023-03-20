@@ -1,9 +1,10 @@
 function largestRange(array) {
+  let nums = {};
   let longestRange = [];
   let range = 0;
   
   for (const num of array) {
-    if (!nums[num]) nums[num] = true;
+   nums[num] = true;
   }
 
 
