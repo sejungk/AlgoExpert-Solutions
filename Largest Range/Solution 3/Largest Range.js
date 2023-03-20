@@ -13,20 +13,18 @@ function largestRange(array) {
     let endingIdx = num;
     
     if (nums[num] === true) {
-      let currLength = 1;
-      let left = num;
-      let right = num;
-
-
       nums[num] = false;
+      let currLength = 1;
+      let left = num-1;
+      let right = num+1;
       
-      while (nums[left - 1]) {
+      while (left in nums) {
         nums[left] = false;
         currLength++;
         startingIdx = left;
         left -= 1;
       }
-      while (nums[right + 1]) {
+      while (nums[right]) {
         nums[right] = false;
         currLength++;
         endingIdx = right;
@@ -36,7 +34,7 @@ function largestRange(array) {
 
       if (currLength > range) {
         range = currLength;
-        longestRange = [left, right]
+        longestRange = [left+1, right-1]
       }
     }
   }
