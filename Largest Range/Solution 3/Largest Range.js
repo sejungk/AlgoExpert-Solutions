@@ -4,7 +4,7 @@ function largestRange(array) {
   let range = 0;
   
   for (const num of array) {
-   nums[num] = true;
+    nums[num] = true;
   }
 
 
