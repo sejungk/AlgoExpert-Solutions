@@ -33,5 +33,7 @@ function expandFromLocalMinIdx(localMinIdx, scores, rewards) {
     rightIdx++;
   }
 }
+
+
 exports.minRewards = minRewards;
 
