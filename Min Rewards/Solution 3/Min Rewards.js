@@ -11,8 +11,6 @@ function minRewards(scores) {
 }
 
 
-
-
 // Do not edit the line below.
 exports.minRewards = minRewards;
 
