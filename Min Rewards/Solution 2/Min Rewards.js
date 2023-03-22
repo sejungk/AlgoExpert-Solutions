@@ -18,10 +18,7 @@ function minRewards(scores) {
 
     if (prev < curr) rewards[i] = Math.max(rewards[i+1] + 1, rewards[i])
   }
-  let sum = rewards.reduce(function(a, b){
-    return a + b;
-  });
-  return sum;
+  return rewards.reduce((a, b) => a + b);
 }
 
 
