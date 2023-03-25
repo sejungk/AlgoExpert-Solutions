@@ -1,4 +1,3 @@
-function zigzagTraverse(array) {
   let height = array.length - 1;
   let width = array[0].length - 1;
   let result = [];
@@ -31,6 +30,8 @@ function zigzagTraverse(array) {
   }
   return result;
 }
+
+
 
 
 function isOutOfBounds(row, col, height, width) {
