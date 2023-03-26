@@ -35,8 +35,6 @@ function zigzagTraverse(array) {
 }
 
 
-
-
 function isOutOfBounds(row, height, col, width) {
   return row < 0 || row > height || col < 0 || col > width;
 }
