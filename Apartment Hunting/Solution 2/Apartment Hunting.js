@@ -1,5 +1,5 @@
 function apartmentHunting(blocks, reqs) {
-  // use array to make it easier to keep track of idx 
+  // use array to make it easier to keep track of idx of block without additional var
   let maxDistancesAtBlocks = new Array(blocks.length).fill(-Infinity);
 
 
