@@ -1,35 +1,42 @@
 function apartmentHunting(blocks, reqs) {
-  let furthestDist = Infinity;
-  let bestBlockIdx;
+  let furthestDistanceAtEachBlock = new Array(blocks.length).fill(-Infinity);
 
 
   for (let i = 0; i < blocks.length; i++) {
-    let currFurthestDist = -Infinity;
-    
     for (const req of reqs) {
       let shortestDistOfReq = Infinity
-      
+
+
       for (let currBlock = 0; currBlock < blocks.length; currBlock++) {
-        let currBlockDist = Math.abs(currBlock - i);
-
-
         // if the currBlock has a req...
         if (blocks[currBlock][req]) {
-         shortestDistOfReq = Math.min(currBlockDist, shortestDistOfReq);
+         shortestDistOfReq = Math.min(shortestDistOfReq, Math.abs(currBlock - i));
         }
       }
       // if our curr requirement is further than others update
-      if (shortestDistOfReq > currFurthestDist) {
-        currFurthestDist = shortestDistOfReq;
-        currBestBlockIdx = i;
-      }
-    }
-    if (currFurthestDist < furthestDist) {
-      furthestDist = currFurthestDist;
-      bestBlockIdx = currBestBlockIdx;
+      // furthestReqDistance = Math.max(furthestReqDistance, shortestDistOfReq);
+      furthestDistanceAtEachBlock[i] = Math.max(furthestDistanceAtEachBlock[i], shortestDistOfReq)
     }
   }
-  return bestBlockIdx;
+  return findMin(furthestDistanceAtEachBlock);
+}
+
+
+
+
+function findMin(array) {
+  let idxAtMinValue = 0;
+  let minValue = Infinity;
+
+
+  for (let i = 0; i < array.length; i++) {
+    let currValue = array[i];
+    if (currValue < minValue) {
+      minValue = currValue;
+      idxAtMinValue = i;
+    }
+  }
+  return idxAtMinValue;
 }
 
 
