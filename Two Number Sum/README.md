@@ -1,3 +1,4 @@
+<pre>
 # Two Number Sum
 
 
@@ -23,3 +24,4 @@ targetSum = 10
 **Sample Output**
 [-1, 11] // the numbers could be in reverse order
 
+</pre>
