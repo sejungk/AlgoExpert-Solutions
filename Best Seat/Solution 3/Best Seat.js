@@ -15,7 +15,7 @@ function bestSeat(seats) {
     // our right pointer will end up at the first 1 after our 0s which is the condition that broke the loop
     let availableSpace = right - left -1;
     if (availableSpace > largestSpace) {
-      bestSeat = Math.ceil(left + (availableSpace / 2));
+      bestSeat = Math.floor((left + right) / 2);
       largestSpace = availableSpace;
     }
     left = right;
