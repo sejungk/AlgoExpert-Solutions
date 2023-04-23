@@ -1,18 +1,19 @@
 function bestSeat(seats) {
-  let bestSeat = -1;
-  let maxSpace = 0;
-
-
   let left = 0;
+  let bestSeat = -1;
+  let largestSpace = 0;
+
+
   while (left < seats.length) {
     let right = left + 1;
-    while (right < seats.length && seats[right] === 0) right++;
-
-
-    let availableSpace = right - left - 1;
-    if (availableSpace > maxSpace) {
-      bestSeat = Math.floor((left + right) / 2);
-      maxSpace = availableSpace;
+    let availableSpace = 0;
+    while (right < seats.length && seats[right] === 0) {
+      availableSpace = right - left;
+      right++;
+    }
+    if (availableSpace > largestSpace) {
+      bestSeat = Math.ceil(left + (availableSpace / 2));
+      largestSpace = availableSpace;
     }
     left = right;
   }
