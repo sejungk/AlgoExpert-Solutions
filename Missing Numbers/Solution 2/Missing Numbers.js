@@ -11,13 +11,19 @@ function missingNumbers(nums) {
 
 
   for (const num of nums) {
+    // determine which half the number is in and add to sum
     if (num <= averageMissingValue) {
       foundFirstHalf += num;
     } else {
       foundSecondHalf += num;
     }
   }
+
+
+  // sum up all nums from 1 to the halfway point inclusive (+ 1)
   const expectedFirstHalf = sum(arrayFromAToB(1, averageMissingValue + 1));
+  
+  // sum up from the halfway point inclusive (+ 1) to end of nums inclusive (+2 +1)
   const expectedSecondHalf = sum(arrayFromAToB(averageMissingValue + 1, nums.length + 3));
   return [expectedFirstHalf - foundFirstHalf, expectedSecondHalf - foundSecondHalf];
 }
