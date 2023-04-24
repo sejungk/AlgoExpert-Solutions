@@ -1,7 +1,5 @@
 function missingNumbers(nums) {
   let total = sum(arrayFromAToB(1, nums.length + 3));
-
-
   for (const num of nums) {
     total -= num;
   }
