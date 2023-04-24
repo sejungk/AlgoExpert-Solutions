@@ -1,21 +1,11 @@
 function missingNumbers(nums) {
-  let foundNums = {};
-  let missingNums = [];
+  let includedNums = new Set(nums);
+  let solution = [];
   
-  for (let i = 1; i <= nums.length + 2; i++) {
-    foundNums[i] = false;
+  for (let num = 1; num < nums.length + 3; num++) {
+    if (!includedNums.has(num)) solution.push(num);
   }
-  
-  for (const num of nums) {
-    if (!foundNums[num]) foundNums[num] = true; 
-  }
-
-
-  for (const [key, value] of Object.entries(foundNums)) {
-    if (!value) missingNums.push(Number(key));
-  }
-  
-  return missingNums;
+  return solution;
 }
 
 
