@@ -1,20 +1,40 @@
 function missingNumbers(nums) {
-  const sorted = nums.sort((a, b) => a - b); // Sort the input array
-  const missingNums = [];
+  let total = sum(arrayFromAToB(1, nums.length + 3));
 
 
-  let currNum = 1;
-  for (let i = 0; i < sorted.length + 2; i++) {
-    while (sorted[i] !== currNum && currNum <= sorted.length + 2) {
-      missingNums.push(currNum);
-      currNum++;
-    }
-    currNum++; // Update the expected number
+  for (const num of nums) {
+    total -= num;
   }
 
 
-  return missingNums;
+  const averageMissingValue = Math.floor(total / 2);
+  let foundFirstHalf = 0;
+  let foundSecondHalf = 0;
+
+
+  for (const num of nums) {
+    if (num <= averageMissingValue) {
+      foundFirstHalf += num;
+    } else {
+      foundSecondHalf += num;
+    }
+  }
+  const expectedFirstHalf = sum(arrayFromAToB(1, averageMissingValue + 1));
+  const expectedSecondHalf = sum(arrayFromAToB(averageMissingValue + 1, nums.length + 3));
+  return [expectedFirstHalf - foundFirstHalf, expectedSecondHalf - foundSecondHalf];
 }
+
+
+const arrayFromAToB = (a, b) => {
+  const array = [];
+  for (let num = a; num < b; num++) {
+    array.push(num);
+  }
+  return array;
+};
+
+
+const sum = array => array.reduce((a, b) => a + b);
 
 
 // Do not edit the line below.
