@@ -16,6 +16,7 @@ function middleNode(linkedList) {
     
   while (fastPointer !== null && fastPointer.next !== null) {
     slowPointer = slowPointer.next;
+    // .next.next will not throw an error bc we know fastPointer.next is not null
     fastPointer = fastPointer.next.next;
   }
 
