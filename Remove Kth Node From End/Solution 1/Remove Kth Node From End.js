@@ -23,6 +23,7 @@ function removeKthNodeFromEnd(head, k) {
     head.next = removeNode.next.next;
     return;
   }
+  
   for (let i = 0; i < position-1; i++) {
     removeNode = removeNode.next;
   }
