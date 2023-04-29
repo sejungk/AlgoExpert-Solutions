@@ -11,18 +11,20 @@ exports.LinkedList = LinkedList;
 
 
 function mergingLinkedLists(linkedListOne, linkedListTwo) {
-  let listOneNodes = new Set();
-  let currentNodeOne = linkedListOne;
-  while (currentNodeOne !== null) {
-    listOneNodes.add(currentNodeOne);
-    currentNodeOne = currentNodeOne.next;
+  let set = new Set();
+  let nodeOne = linkedListOne;
+  let nodeTwo = linkedListTwo;
+
+
+  while (nodeOne !== null) {
+    set.add(nodeOne.value); 
+    nodeOne = nodeOne.next;
   }
 
 
-  let currentNodeTwo = linkedListTwo
-  while (currentNodeTwo !== null) {
-    if (listOneNodes.has(currentNodeTwo)) return currentNodeTwo;
-    currentNodeTwo = currentNodeTwo.next;
+  while (nodeTwo !== null) {
+    if (set.has(nodeTwo.value)) return nodeTwo;
+    nodeTwo = nodeTwo.next;
   }
   return null;
 }
@@ -31,3 +33,10 @@ function mergingLinkedLists(linkedListOne, linkedListTwo) {
 // Do not edit the line below.
 exports.mergingLinkedLists = mergingLinkedLists;
 
+
+// // This is an input class. Do not edit.
+// class LinkedList {
+//   constructor(value) {
+//     this.value = value;
+//     this.next = null;
+//   }
