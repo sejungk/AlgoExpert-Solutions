@@ -11,22 +11,24 @@ exports.LinkedList = LinkedList;
 
 
 function mergingLinkedLists(linkedListOne, linkedListTwo) {
-  let set = new Set();
   let nodeOne = linkedListOne;
   let nodeTwo = linkedListTwo;
 
 
-  while (nodeOne !== null) {
-    set.add(nodeOne.value); 
-    nodeOne = nodeOne.next;
-  }
+  // this will not be an indefinite loop because by the time we looped twice,
+  // if there is not intersection, we will end up at null values at the same time
+  // since we iterated through same # of node, this will break the loop
+  // since both nodes will be equal to null
+  
+  while (nodeOne !== nodeTwo) {
+    if (nodeOne === null) nodeOne = linkedListTwo;
+    else nodeOne = nodeOne.next;
 
 
-  while (nodeTwo !== null) {
-    if (set.has(nodeTwo.value)) return nodeTwo;
-    nodeTwo = nodeTwo.next;
+    if (nodeTwo === null) nodeTwo = linkedListOne;
+    else nodeTwo = nodeTwo.next;
   }
-  return null;
+  return nodeOne;
 }
 
 
@@ -40,3 +42,11 @@ exports.mergingLinkedLists = mergingLinkedLists;
 //     this.value = value;
 //     this.next = null;
 //   }
+// }
+
+
+// exports.LinkedList = LinkedList;
+
+
+// function mergingLinkedLists(linkedListOne, linkedListTwo) {
+//   let listOneNodes = new Set();
