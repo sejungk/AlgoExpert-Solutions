@@ -15,20 +15,14 @@ function shiftLinkedList(head, k) {
     tailNode = tailNode.next;
     length++;
   }
+
+
+  let shift = Math.abs(k) % length;
+  let shiftPoint = k > 0 ? length - shift : shift;
+  if (shiftPoint === 0 || shiftPoint === length) return head;
   
-  shiftPoint = k;
-  if (Math.abs(k) > length) shiftPoint = k % length;
-  if (shiftPoint < 0) shiftPoint = length + shiftPoint;
-  shiftPoint = length - shiftPoint;
-
-
   let headNode = head;
   let prevNode = head;
-  let currNode = head;
-
-
-  if (shiftPoint === length || k === 0 || k === length) return head;
-  
   for (let i = 1; i < shiftPoint; i++) {
     prevNode = prevNode.next;
   }
