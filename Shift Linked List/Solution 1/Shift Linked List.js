@@ -8,11 +8,11 @@ class LinkedList {
 
 
 function shiftLinkedList(head, k) {
-  let length = 0;
-  let node = head;
+  let length = 1;
+  let tailNode = head;
   
-  while (node !== null) {
-    node = node.next;
+  while (tailNode.next !== null) {
+    tailNode = tailNode.next;
     length++;
   }
   
@@ -32,16 +32,10 @@ function shiftLinkedList(head, k) {
   for (let i = 1; i < shiftPoint; i++) {
     prevNode = prevNode.next;
   }
+  
   let newHead = prevNode.next;
-
-
-  for (let i = 1; i < length; i++) {
-    currNode = currNode.next;
-  }
-
-
   prevNode.next = null;
-  currNode.next = headNode;
+  tailNode.next = headNode;
   return newHead;
 }
 
