@@ -9,8 +9,6 @@ class LRUCache {
     this.listOfMostRecent = new DoublyLinkedList();
   }
   
-
-
   insertKeyValuePair(key, value) {
     if (!(key in this.cache)) {
       if (this.currentSize === this.maxSize) {
