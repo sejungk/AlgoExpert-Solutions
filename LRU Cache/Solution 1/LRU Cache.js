@@ -1,6 +1,3 @@
-// Do not edit the class below except for the insertKeyValuePair,
-// getValueFromKey, and getMostRecentKey methods. Feel free
-// to add new properties and methods to the class.
 class LRUCache {
   constructor(maxSize) {
     this.cache = {};
@@ -11,11 +8,8 @@ class LRUCache {
   
   insertKeyValuePair(key, value) {
     if (!(key in this.cache)) {
-      if (this.currentSize === this.maxSize) {
-        this.evictLeastRecent();
-      } else {
-        this.currentSize++;
-      }
+      if (this.currentSize === this.maxSize) this.evictLeastRecent();
+      else this.currentSize++;
       this.cache[key] = new DoublyLinkedListNode(key, value);
     } else {
       this.replaceKey(key, value);
@@ -34,5 +28,12 @@ class LRUCache {
   getMostRecentKey() {
     if (!this.listOfMostRecent.head) return;
     return this.listOfMostRecent.head.key;
+  }
+
+
+  evictLeastRecent() {
+    const keyToRemove = this.listOfMostRecent.tail.key;
+    this.listOfMostRecent.removeTail();
+    delete this.cache[keyToRemove];
   }
 
