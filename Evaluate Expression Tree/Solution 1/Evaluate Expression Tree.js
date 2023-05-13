@@ -22,8 +22,8 @@ function evaluateExpressionTree(tree) {
   if (tree.value === -1) return leftValue + rightValue;
   if (tree.value === -2) return leftValue - rightValue;
   if (tree.value === -3) return Math.trunc(leftValue / rightValue);
-  
-  return leftValue * rightValue;
+  if (tree.value === -4) return leftValue * rightValue;
+  // return leftValue * rightValue;
 }
 
 
