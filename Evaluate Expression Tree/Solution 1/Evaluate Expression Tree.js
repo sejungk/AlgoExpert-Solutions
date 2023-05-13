@@ -9,9 +9,6 @@ class BinaryTree {
 
 
 function evaluateExpressionTree(tree) {
-  // breadth first approach
-  // calc all pairs level by level
-  // keep track of calcs for each branch
   if (tree.value >= 0) return tree.value;
 
 
@@ -23,7 +20,6 @@ function evaluateExpressionTree(tree) {
   if (tree.value === -2) return leftValue - rightValue;
   if (tree.value === -3) return Math.trunc(leftValue / rightValue);
   if (tree.value === -4) return leftValue * rightValue;
-  // return leftValue * rightValue;
 }
 
 
