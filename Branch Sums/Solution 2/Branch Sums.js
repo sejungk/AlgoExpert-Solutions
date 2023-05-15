@@ -10,23 +10,23 @@ class BinaryTree {
 
 
 function branchSums(root) {
-  let allSums = [];
-	calculateSums(root, allSums, 0);
-	return allSums;
+  let sums = [];
+	calculateBranchSums(root, 0, sums);
+	return sums;
 }
 
 
-function calculateSums(currentNode, allSums, currentSum) {
-	if (!currentNode) return;
+function calculateBranchSums(node, runningSum, sums) {
+	if (!node) return;
 
 
-	let newCurrentSum = currentSum + currentNode.value;
-	if (!currentNode.left && !currentNode.right) {
-		allSums.push(newCurrentSum);
+	let newRunningSum = runningSum + node.value;
+	if (!node.left && !node.right) {
+		sums.push(newRunningSum);
 		return;
 	}
-	calculateSums(currentNode.left, allSums, newCurrentSum);
-	calculateSums(currentNode.right, allSums, newCurrentSum);
+	calculateBranchSums(node.left, newRunningSum, sums);
+	calculateBranchSums(node.right, newRunningSum, sums);
 }
 
 
