@@ -18,13 +18,14 @@ function branchSums(root) {
 
 function calcBranch(array, node, runningSum) {
   if (!node) return;
-  runningSum = node.value + runningSum;
+  
+  const newRunningSum = node.value + runningSum;
   if (node.left === null && node.right === null) {
-    array.push(runningSum);
+    array.push(newRunningSum);
     return;
   }
-  calcBranch(array, node.left, runningSum);
-  calcBranch(array, node.right, runningSum);
+  calcBranch(array, node.left, newRunningSum);
+  calcBranch(array, node.right, newRunningSum);
 }
 // Do not edit the lines below.
 exports.BinaryTree = BinaryTree;
