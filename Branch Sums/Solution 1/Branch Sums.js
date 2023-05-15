@@ -11,22 +11,22 @@ class BinaryTree {
 
 function branchSums(root) {
   let sums = [];
-  calcBranch(sums, root, 0);
+  calcBranch(sums, root, 0)
   return sums;
 }
 
 
 function calcBranch(array, node, runningSum) {
   if (!node) return;
-  
-  const newRunningSum = node.value + runningSum;
-  if (node.left === null && node.right === null) {
-    array.push(newRunningSum);
-    return;
-  }
+  const newRunningSum = runningSum + node.value;
+  if (node.left === null && node.right === null) array.push(newRunningSum);
+
+
   calcBranch(array, node.left, newRunningSum);
   calcBranch(array, node.right, newRunningSum);
 }
+
+
 // Do not edit the lines below.
 exports.BinaryTree = BinaryTree;
 exports.branchSums = branchSums;
