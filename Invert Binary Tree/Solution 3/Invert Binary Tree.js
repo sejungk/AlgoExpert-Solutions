@@ -1,15 +1,51 @@
+// function invertBinaryTree(tree) {
+//   if (!tree) return;
+
+
+//   let temp = tree.right;
+//   tree.right = tree.left;
+//   tree.left = temp;
+
+
+//   invertBinaryTree(tree.right);
+//   invertBinaryTree(tree.left);
+// }
+
+
+// function invertBinaryTree(tree) {
+//   if (!tree) return;
+
+
+//   let temp = tree.right;
+//   tree.right = tree.left;
+//   tree.left = temp;
+
+
+//   invertBinaryTree(tree.right);
+//   invertBinaryTree(tree.left);
+// }
+
+
 function invertBinaryTree(tree) {
-  if (!tree) return;
+  let queue = [tree];
+  
+  while (queue.length) {
+    let node = queue.pop();
+    if (!node) continue;
+    
+    invert(node);
+    queue.push(node.left);
+    queue.push(node.right);
+  }
+  return tree;
+}
 
 
+function invert(tree) {
   let temp = tree.right;
   tree.right = tree.left;
   tree.left = temp;
-
-
-  invertBinaryTree(tree.right);
-  invertBinaryTree(tree.left);
-}
+} 
 
 
 // This is the class of the input binary tree.
