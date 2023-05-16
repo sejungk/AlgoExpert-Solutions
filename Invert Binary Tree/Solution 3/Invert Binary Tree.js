@@ -41,10 +41,10 @@ function invertBinaryTree(tree) {
 }
 
 
-function invert(tree) {
-  let temp = tree.right;
-  tree.right = tree.left;
-  tree.left = temp;
+function invert(node) {
+  let temp = node.right;
+  node.right = node.left;
+  node.left = temp;
 } 
 
 
