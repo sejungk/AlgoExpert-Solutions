@@ -9,25 +9,25 @@ class BinaryTree {
 
 
 function binaryTreeDiameter(tree) {
-  return getTreeInfo(tree).diameter;
+  return getTreeInfo(tree).diameter
 }
 
 
-function getTreeInfo(tree) {
-  if (tree === null) return new TreeInfo(0, 0);
+function getTreeInfo(root) {
+  if (!root) return new TreeInfo(0, 0);
 
 
-  let leftBranch = getTreeInfo(tree.left);
-  let rightBranch = getTreeInfo(tree.right);
+  let leftTreeInfo = getTreeInfo(root.left);
+  let rightTreeInfo = getTreeInfo(root.right);
 
 
-  const longestPathThroughRoot = leftBranch.height + rightBranch.height;
-  const maxDiameterSoFar = Math.max(leftBranch.diameter, rightBranch.diameter);
-  const currDiameter = Math.max(maxDiameterSoFar, longestPathThroughRoot);
-  const currHeight = 1 + Math.max(leftBranch.height, rightBranch.height);
+  const longestPath = leftTreeInfo.height + rightTreeInfo.height;
+  const prevDiameter = Math.max(leftTreeInfo.diameter, rightTreeInfo.diameter);
+  const diameter = Math.max(longestPath, prevDiameter);
+  const height = 1 + Math.max(leftTreeInfo.height, rightTreeInfo.height);
 
 
-  return new TreeInfo(currHeight, currDiameter)
+  return new TreeInfo(height, diameter);
 }
 
 
