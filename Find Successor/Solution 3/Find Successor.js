@@ -10,7 +10,7 @@ class BinaryTree {
 
 
 function findSuccessor(tree, node) {
-  if (node.right != null) return getLeftmostChild(node.right);
+  if (node.right !== null) return getLeftmostChild(node.right);
   return getRightmostParent(node);
 }
 
