@@ -37,6 +37,14 @@ const DIGIT_LETTERS = {
 }
 
 
+// recursive calls 
+//                             p(0)
+//            /           /            \           \ 
+//          p(1)         p(1)          p(1)         p(1)
+//          /             |              |             \
+//        p(3)           p(3)           p(3)           p(3)
+//      /  |  \         / | \          / | \           / | \
+//  p(4) p(4) p(4)  p(4) p(4) p(4) p(4) p(4) p(4)  p(4) p(4) p(4)
 // Do not edit the line below.
 exports.phoneNumberMnemonics = phoneNumberMnemonics;
 
