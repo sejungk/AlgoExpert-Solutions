@@ -1,19 +1,20 @@
 function staircaseTraversal(height, maxSteps) {
-  return numberOfWaysToTop(height, maxSteps, {0: 1, 1: 1});
-}
-
-
-function numberOfWaysToTop(height, maxSteps, memo) {
-  if (height in memo) return memo[height];
-
-
-  let numberOfWays = 0;
-  for (let step = 1; step < Math.min(maxSteps, height) + 1; step++) {
-    numberOfWays += numberOfWaysToTop(height - step, maxSteps, memo);
-  }
-  memo[height] = numberOfWays;
+  // we want our array to be height+1 long because 
+  // we need to include our base case of 0
   
-  return numberOfWays;
+  let steps = new Array(height+1).fill(0); 
+  steps[0] = 1;
+  steps[1] = 1;
+
+
+  for (let currentHeight = 2; currentHeight < steps.length; currentHeight++) {
+    let step = 1;
+    while (step <= maxSteps && step <= currentHeight) {
+      steps[currentHeight] = steps[currentHeight] + steps[currentHeight-step];
+      step++;
+    }
+  }
+  return steps[height];
 }
 
 
