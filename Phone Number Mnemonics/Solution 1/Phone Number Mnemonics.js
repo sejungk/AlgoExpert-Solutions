@@ -7,8 +7,6 @@ function phoneNumberMnemonics(phoneNumber) {
 }
 
 
-
-
 function phoneNumberMnemonicsHelper(idx, phoneNumber, currMnemonic, mnemonicsFound) {
   if (idx === phoneNumber.length) {
     const mnemonic = currMnemonic.join('');
