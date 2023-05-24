@@ -1,40 +1,86 @@
-function staircaseTraversal(height, maxSteps) {
-  return numberOfWaysToTop(height, maxSteps)
-}
-
-
-function numberOfWaysToTop(height, maxSteps) {
-  if (height <= 1) return 1;
-
-
-  let numberOfWays = 0; 
-  for (let step = 1; step < Math.min(maxSteps, height) + 1; step++) {
-    numberOfWays += numberOfWaysToTop(height - step, maxSteps);
-  }
+//   let numberOfWays = 0;
+//   for (let step = 1; step < Math.min(maxSteps, height) + 1; step++) {
+//     numberOfWays += numberOfWaysToTop(height - step, maxSteps, memo);
+//   }
+//   memo[height] = numberOfWays;
   
-  return numberOfWays;
-}
+//   return numberOfWays;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function staircaseTraversal(height, maxSteps) {
+//   return calcSteps(height, maxSteps);
+// }
+
+
+// function calcSteps(height, maxSteps) {
+//   if (height <= 1) return 1;
+
+
+//   let numberOfWays = 0;
+//   for (let step = 1; step < Math.min(maxSteps, height) + 1; step++) {
+//     numberOfWays += calcSteps(height - step, maxSteps)
+//   }
+//   return numberOfWays;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function staircaseTraversal(height, maxSteps) {
-  return numberOfWaysToTop(height, maxSteps, {0: 1, 1: 1});
-}
+  let currentNumberOfWays = 0;
+  let waysToTop = [1];
 
 
-function numberOfWaysToTop(height, maxSteps, memo) {
-  if (height in memo) return memo[height];
+  for (let currentHeight = 1; currentHeight < height + 1; currentHeight++) {
+    const startOfWindow = currentHeight - maxSteps - 1;
+    const endOfWindow = currentHeight - 1;
+    if (startOfWindow >= 0) currentNumberOfWays -= waysToTop[startOfWindow];
 
 
-  let numberOfWays = 0;
-  for (let step = 1; step < Math.min(maxSteps, height) + 1; step++) {
-    numberOfWays += numberOfWaysToTop(height - step, maxSteps, memo);
+    currentNumberOfWays += waysToTop[endOfWindow];
+    waysToTop.push(currentNumberOfWays);
   }
-  memo[height] = numberOfWays;
-  
-  return numberOfWays;
+  return waysToTop[height]
 }
-
-
 // Do not edit the line below.
 exports.staircaseTraversal = staircaseTraversal;
 
