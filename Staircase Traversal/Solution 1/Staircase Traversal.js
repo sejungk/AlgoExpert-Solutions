@@ -63,6 +63,8 @@ function staircaseTraversal(height, maxSteps) {
     // step 1, step 2, step 3
     // idx 0,  idx 1,  idx 2
     // we subtract one to account for 0 based indexing
+    //ex. currentHeight = 5, maxStep = 3, start of window should be step 2
+    // step 2 would be located at idx 1
     const startOfWindow = currentHeight - maxSteps - 1;
     const endOfWindow = currentHeight - 1;
     if (startOfWindow >= 0) currentNumberOfWays -= numberOfWays[startOfWindow];
