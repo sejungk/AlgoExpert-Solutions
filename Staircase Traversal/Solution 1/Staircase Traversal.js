@@ -56,20 +56,21 @@
 
 
 function staircaseTraversal(height, maxSteps) {
-  return findWaysToTop(height, maxSteps, {0: 1, 1: 1});
-}
-
-
-function findWaysToTop(height, maxSteps, steps) {
-  if (height in steps) return steps[height];
-
-
-  let waysToTop = 0;
-  for (let i = 1; i < Math.min(height, maxSteps) + 1; i++) {
-    waysToTop += findWaysToTop(height - i, maxSteps, steps);
+  let numberOfWays = [1];
+  let currentNumberOfWays = 0;
+  
+  for (let currentHeight = 1; currentHeight < height + 1; currentHeight++) {
+    // step 1, step 2, step 3
+    // idx 0,  idx 1,  idx 2
+    // we subtract one to account for 0 based indexing
+    const startOfWindow = currentHeight - maxSteps - 1;
+    const endOfWindow = currentHeight - 1;
+    if (startOfWindow >= 0) currentNumberOfWays -= numberOfWays[startOfWindow];
+   
+    currentNumberOfWays += numberOfWays[endOfWindow];
+    numberOfWays.push(currentNumberOfWays)
   }
-  steps[height] = waysToTop;
-  return waysToTop;
+  return numberOfWays[height];
 }
 // Do not edit the line below.
 exports.staircaseTraversal = staircaseTraversal;
