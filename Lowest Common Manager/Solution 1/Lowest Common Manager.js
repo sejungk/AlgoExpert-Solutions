@@ -7,7 +7,7 @@ function getOrgInfo(manager, reportOne, reportTwo) {
   let numImportantReports = 0;
   for (const directReports of manager.directReports) {
     const orgInfo = getOrgInfo(directReports, reportOne, reportTwo);
-    if (!!orgInfo.lowestCommonManager) return orgInfo;
+    if (orgInfo.lowestCommonManager) return orgInfo;
     numImportantReports += orgInfo.numImportantReports;
   }
   // there will always come a point where we reach a subtree that rooted at one of our 2 reports
