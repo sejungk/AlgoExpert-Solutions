@@ -19,6 +19,8 @@ function getOrgInfo(manager, reportOne, reportTwo) {
 }
 
 
+
+
 // This is an input class. Do not edit.
 class OrgChart {
   constructor(name) {
