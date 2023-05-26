@@ -7,6 +7,7 @@ function getOrgInfo(manager, reportOne, reportTwo) {
   let numImportantReports = 0;
   for (const directReports of manager.directReports) {
     const orgInfo = getOrgInfo(directReports, reportOne, reportTwo);
+    // if we've found lowest common manager, return object
     if (orgInfo.lowestCommonManager) return orgInfo;
     numImportantReports += orgInfo.numImportantReports;
   }
