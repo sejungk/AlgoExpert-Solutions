@@ -49,6 +49,9 @@ function tryDigitsAtPosition(row, col, board) {
       if (solvePartialSudoku(row, col + 1, board)) return true;
     }
   }
+  // if board cannot be solved with our inserted values, we need to reset curr square
+  // return false to indicate that we we're not able to solve board with digit
+  // backtracking to find mistake
   board[row][col] = 0;
   return false;
 }
