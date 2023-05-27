@@ -1,6 +1,6 @@
 function interweavingStrings(one, two, three) {
   if (one.length + two.length !== three.length) return false;
-  let cache = new Array(one.length + 1).fill(0).map(_ => new Array(two.length + 1).fill(null));
+  let cache = new Array(one.length + 1).fill(null).map(_ => new Array(two.length + 1).fill(null));
   return areInterwoven(one, two, three, 0, 0, cache);
 }
 
