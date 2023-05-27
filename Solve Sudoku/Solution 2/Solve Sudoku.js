@@ -35,8 +35,6 @@ function solvePartialSudoku(row, col, board) {
 }
 
 
-
-
 function tryDigitsAtPosition(row, col, board) {
   // loop through all digits 1 - 9
   for (let digit = 1; digit < 10; digit++) {
