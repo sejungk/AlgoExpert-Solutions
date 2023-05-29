@@ -5,21 +5,17 @@ function solveSudoku(board) {
 
 
 function solveBoard(board, row, col) {
-  let currCol = col;
-  let currRow = row;
-
-
-  if (currCol === board[currRow].length) {
-    currRow++;
-    currCol = 0;
-    if (currRow === board.length) return true;
+  if (col === board[row].length) {
+    row++;
+    col = 0;
+    if (row === board.length) return true;
   }
 
 
-  if (board[currRow][currCol] === 0) {
-    return tryDigitsAtPosition(board, currCol, currRow);
+  if (board[row][col] === 0) {
+    return tryDigitsAtPosition(board, col, row);
   }
-  return solveBoard(board, currRow, currCol + 1);
+  return solveBoard(board, row, col + 1);
 }
 
 
