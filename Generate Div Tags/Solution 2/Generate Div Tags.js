@@ -1,4 +1,7 @@
-// Space/Time complexity: catalan number
+// This kind of question is designed to test how you can implement a solution
+// It's not designed to test a candidates ability to analyze space/time complexity
+// Space/Time complexity: Catalan Number
+// space: O((2n)!/((n!((n + 1)!)))) time: O((2n)!/((n!((n + 1)!))))
 
 
 function generateDivTags(numberOfTags) {
@@ -19,10 +22,7 @@ function createDivs(prefix, openingTagsNeeded, closingTagsNeeded, allDivTags) {
   }
 
 
-  if (closingTagsNeeded === 0) {
-    allDivTags.push(prefix);
-    return allDivTags;
-  }
+  if (closingTagsNeeded === 0) allDivTags.push(prefix);
 }
 
 
