@@ -2,26 +2,26 @@
 
 
 function generateDivTags(numberOfTags) {
-  let output = [];
-  generatePartialTags("", numberOfTags, numberOfTags, output);
-  return output;
+  let allDivTags = [];
+  createDivs("", numberOfTags, numberOfTags, allDivTags);
+  return allDivTags;
 }
 
 
-function generatePartialTags(prefix, opening, closing, output) {
-  if (opening > 0) {
-    generatePartialTags(prefix + "<div>", opening - 1, closing, output);
+function createDivs(prefix, openingTagsNeeded, closingTagsNeeded, allDivTags) {
+  if (openingTagsNeeded > 0) {
+    createDivs(prefix + "<div>", openingTagsNeeded - 1, closingTagsNeeded, allDivTags);
   }
 
 
-  if (closing > opening) {
-    generatePartialTags(prefix + "</div>", opening, closing - 1, output);
+  if (closingTagsNeeded > openingTagsNeeded) {
+    createDivs(prefix + "</div>", openingTagsNeeded, closingTagsNeeded - 1, allDivTags);
   }
 
 
-  if (closing === 0) {
-    output.push(prefix);
-    return output;
+  if (closingTagsNeeded === 0) {
+    allDivTags.push(prefix);
+    return allDivTags;
   }
 }
 
