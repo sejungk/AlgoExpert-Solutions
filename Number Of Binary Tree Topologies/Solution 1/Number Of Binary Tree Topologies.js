@@ -1,3 +1,4 @@
+// time: catalan number space: catalan number
 function numberOfBinaryTreeTopologies(n) {
   if (n === 0) return 1;
   let numberOfTrees = 0;
