@@ -1,24 +1,29 @@
+// function powerset(array, idx = null) {
+//   if (idx === null) idx = array.length - 1;
+
+
+//   if (idx < 0) return [[]];
+//   const elem = array[idx];
+//   const subsets = powerset(array, idx - 1);
+//   const length = subsets.length;
+//   for (let i = 0; i < length; i++) {
+//     const currentSubset = subsets[i];
+//     subsets.push(currentSubset.concat(elem));
+//   }
+//   return subsets;
+// }
+
+
 function powerset(array) {
-  let subsets = [[]];
+  const subsets = [[]];
   for (const elem of array) {
-    const length = subsets.length;
+    const length = subsets.length; 
     for (let i = 0; i < length; i++) {
       const currentSubset = subsets[i];
-      subsets.push(currentSubset.concat(elem))
+      subsets.push(currentSubset.concat(elem));
     }
   }
   return subsets;
-}
-
-
-function findSubsets(subsets, array, i) {
-  if (!array.length) subsets.push(array);
-
-
-  for (let j = i; j < array.length; j++) {
-    let removed = array.slice(0, i).concat(array.slice(i+1));
-    
-  }
 }
 
 
