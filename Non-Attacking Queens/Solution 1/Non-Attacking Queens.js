@@ -1,34 +1,41 @@
 function nonAttackingQueens(n) {
-  const colPositions = new Array(n).fill(0);
-  return findQueenPositions(0, n, colPositions);
+  let onDiagonalUp = new Set();
+  let onDiagonalDown = new Set();
+  let onSameCol = new Set();
+  return findQueenPlacements(onDiagonalUp, onDiagonalDown, onSameCol, n, 0); 
 }
 
 
-function findQueenPositions(row, boardSize, colPositions) {
+function findQueenPlacements(onDiagonalUp, onDiagonalDown, onSameCol, boardSize, row) {
   if (row === boardSize) return 1;
-  
-  let validPositions = 0;
+
+
+  let numOfPositions = 0;
   for (let col = 0; col < boardSize; col++) {
-    if (isNonAttackingPosition(row, col, colPositions)) {
-      colPositions[row] = col;
-      validPositions += findQueenPositions(row + 1, boardSize, colPositions)
+    if (onNonAttackingSquare(onDiagonalUp, onDiagonalDown, onSameCol, row, col)) {
+      placeQueen(onDiagonalUp, onDiagonalDown, onSameCol, row, col);
+      numOfPositions += findQueenPlacements(onDiagonalUp, onDiagonalDown, onSameCol, boardSize, row + 1)
+      removeQueen(onDiagonalUp, onDiagonalDown, onSameCol, row, col);
     }
   }
-  return validPositions;
+  return numOfPositions;
 }
 
 
-function isNonAttackingPosition(row, col, colPositions) {
-  for (let prevRow = 0; prevRow < row; prevRow++) {
-    const prevCol = colPositions[prevRow];
-    const sameCol = prevCol === col;
-    const isOnDiagonal = row - prevRow === Math.abs(prevCol - col);
-    if (sameCol || isOnDiagonal) return false;
-  }
+function onNonAttackingSquare(onDiagonalUp, onDiagonalDown, onSameCol, row, col) {
+  if (onSameCol.has(col)) return false;
+  if (onDiagonalDown.has(row - col)) return false;
+  if (onDiagonalUp.has(row + col)) return false;
   return true;
 }
 
 
-// Do not edit the line below.
-exports.nonAttackingQueens = nonAttackingQueens;
+function placeQueen(onDiagonalUp, onDiagonalDown, onSameCol, row, col) {
+  onDiagonalUp.add(row + col);
+  onDiagonalDown.add(row - col);
+  onSameCol.add(col);
+}
 
+
+function removeQueen(onDiagonalUp, onDiagonalDown, onSameCol, row, col) {
+  onDiagonalUp.delete(row + col);
