@@ -27,7 +27,7 @@ function symmetricalTree(tree) {
 
 function traverseTree(leftNode, rightNode) {
   if (leftNode === null && rightNode === null) return true;
-  if (leftNode === null || rightNode === null || leftNode.value !== rightNode.value) return false;
+  if (!leftNode || !rightNode || leftNode.value !== rightNode.value) return false;
   
   return traverseTree(leftNode.left, rightNode.right) && traverseTree(rightNode.left, leftNode.right);
 }
