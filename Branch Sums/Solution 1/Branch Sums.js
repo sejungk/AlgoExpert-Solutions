@@ -22,7 +22,7 @@ function calculateBranchSums(node, branchSums, currSum) {
   const newSum = currSum + node.value;
 
 
-  if (!node.left && !node.right) branchSums.push(newSum);
+  if (!node.left && !node.right) branchSums.push(newSum)
   calculateBranchSums(node.left, branchSums, newSum);
   calculateBranchSums(node.right, branchSums, newSum);
 }
