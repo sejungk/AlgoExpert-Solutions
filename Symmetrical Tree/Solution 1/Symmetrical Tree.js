@@ -33,6 +33,14 @@ function traverseTree(leftNode, rightNode) {
 }
 
 
+function traverseTree(leftNode, rightNode) {
+  if (leftNode === null && rightNode === null) return true;
+  if (!leftNode || !rightNode || leftNode.value !== rightNode.value) return false;
+  
+  return traverseTree(leftNode.left, rightNode.right) && traverseTree(rightNode.left, leftNode.right);
+}
+
+
 // Do not edit the line below.
 exports.symmetricalTree = symmetricalTree;
 
