@@ -34,7 +34,7 @@ function symmetricalTree(tree) {
 
 
 function treesAreMirrored(left, right) {
-  if (left !== null && right !== null && left.value === right.value) {
+  if (left && right && left.value === right.value) {
     return treesAreMirrored(left.left, right.right) && treesAreMirrored(left.right, right.left);
   }
   return left === right;
