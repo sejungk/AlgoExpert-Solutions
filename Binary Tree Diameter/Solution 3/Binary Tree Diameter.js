@@ -19,14 +19,14 @@ function getTreeInfo(tree) {
 
   const leftTreeInfo = getTreeInfo(tree.left);
   const rightTreeInfo = getTreeInfo(tree.right);
-
-
-  const longestPathThroughRoot = leftTreeInfo.height + rightTreeInfo.height;
-  const maxDiameterSoFar = Math.max(leftTreeInfo.diameter, rightTreeInfo.diameter);
-  const currDiameter = Math.max(longestPathThroughRoot, maxDiameterSoFar);
-  const currHeight = 1 + Math.max(leftTreeInfo.height, rightTreeInfo.height);
   
-  return new TreeInfo(currDiameter, currHeight);
+  const longestPath = leftTreeInfo.height + rightTreeInfo.height;
+  const maxDiameterSoFar = Math.max(leftTreeInfo.diameter, rightTreeInfo.diameter);
+  const newDiameter = Math.max(longestPath, maxDiameterSoFar);
+  const newHeight = 1 + Math.max(leftTreeInfo.height, rightTreeInfo.height);
+
+
+  return new TreeInfo(newDiameter, newHeight);
 }
 
 
@@ -36,8 +36,6 @@ class TreeInfo {
     this.height = height;
   }
 }
-
-
 // Do not edit the line below.
 exports.binaryTreeDiameter = binaryTreeDiameter;
 exports.BinaryTree = BinaryTree;
