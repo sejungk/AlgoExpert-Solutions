@@ -6,8 +6,6 @@ class BinaryTree {
     this.right = null;
   }
 }
-
-
 // start breadth first search at target node
 // find all parent nodes
 // find target node
@@ -40,36 +38,3 @@ function breadthFirstSearchForNodesDistanceK(targetNode, nodesToParents, k) {
 
     const connectedNodes = [currentNode.left, currentNode.right, nodesToParents[currentNode.value]];
     for (const node of connectedNodes) {
-      if (node === null) continue;
-      if (seen.has(node.value)) continue;
-      seen.add(node.value);
-      queue.push([node, distanceFromTarget + 1]);
-    }
-  }
-  return [];
-}
-
-
-function getNodeFromValue(value, tree, nodesToParents) {
-  if (tree.value === value) return tree;
-
-
-  const nodeParent = nodesToParents[value];
-  if (nodeParent.left !== null && nodeParent.left.value === value) return nodeParent.left;
-  return nodeParent.right;
-}
-
-
-function populateNodesToParents(node, nodesToParents, parent = null) {
-  if (node !== null) {
-    nodesToParents[node.value] = parent;
-    populateNodesToParents(node.left, nodesToParents, node);
-    populateNodesToParents(node.right, nodesToParents, node);
-  }
-}
-
-
-// Do not edit the lines below.
-exports.BinaryTree = BinaryTree;
-exports.findNodesDistanceK = findNodesDistanceK;
-
