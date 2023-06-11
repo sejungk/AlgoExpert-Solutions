@@ -7,6 +7,8 @@
 // how do you determine whether or not you should call callback func? the previous node traversed will determine whether you call callback
 
 
+
+
 function iterativeInOrderTraversal(tree, callback) {
   let prevNode = null;
   let currNode = tree;
