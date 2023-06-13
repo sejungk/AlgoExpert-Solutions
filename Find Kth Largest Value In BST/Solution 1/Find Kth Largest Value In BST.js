@@ -8,8 +8,6 @@ class BST {
 }
 
 
-
-
 function findKthLargestValueInBst(tree, k) {
 	const sortedNodes = [];
   inorderTraverse(tree, sortedNodes);
