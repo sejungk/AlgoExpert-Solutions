@@ -16,6 +16,8 @@ class TreeInfo {
 }
 
 
+
+
 function heightBalancedBinaryTree(tree) {
   return calculateHeight(tree).isBalanced;
 }
