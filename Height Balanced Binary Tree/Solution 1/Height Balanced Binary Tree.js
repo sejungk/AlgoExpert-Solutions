@@ -13,7 +13,6 @@ class TreeInfo {
     this.isBalanced = isBalanced;
     this.height = height;
   }
-  
 }
 
 
