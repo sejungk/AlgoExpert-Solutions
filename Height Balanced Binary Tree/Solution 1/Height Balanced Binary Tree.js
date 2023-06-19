@@ -21,6 +21,8 @@ function heightBalancedBinaryTree(tree) {
 }
 
 
+
+
 function calculateHeight(tree) {
   if (tree === null) return new TreeInfo(true, -1);
   
