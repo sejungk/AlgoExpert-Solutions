@@ -5,6 +5,8 @@ function getPermutations(array) {
 }
 
 
+
+
 function permutationsHelper(i, array, permutations) {
   if (i === array.length-1) {
     permutations.push(array.slice());
