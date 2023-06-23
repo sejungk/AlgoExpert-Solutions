@@ -1,21 +1,23 @@
-function getPermutations(array, output = []) {
+function getPermutations(array) {
   const permutations = [];
-  permutationsHelper(array, [], permutations);
+  permutationsBuilder(array, [], permutations);
   return permutations;
 }
 
 
-function permutationsHelper(array, currentPermutation, permutations) {
-  if (!array.length && currentPermutation.length) {
-    permutations.push(currentPermutation);
-  } else {
+function permutationsBuilder(array, currPermutation, permutations) {
+  if (!array.length && currPermutation.length) permutations.push(currPermutation);
+  else {
     for (let i = 0; i < array.length; i++) {
-      const newArray = array.slice(0, i).concat(array.slice(i + 1));
-      const newPermutation = currentPermutation.concat([array[i]]);
-      permutationsHelper(newArray, newPermutation, permutations);
+      // native function slice is O(n) time
+      let newArray = array.slice(0, i).concat(array.slice(i + 1));
+      const newPerm = currPermutation.concat(array[i]);
+      permutationsBuilder(newArray, newPerm, permutations);
     }
   }
 }
+
+
 
 
 // Do not edit the line below.
