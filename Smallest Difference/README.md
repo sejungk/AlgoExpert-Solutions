@@ -1,3 +1,4 @@
+<pre>
 # Smallest Difference
 
 
@@ -21,3 +22,4 @@ arrayTwo = [26, 134, 135, 15, 17]
 
 **Sample Output**
 [28, 26]
+</pre>
