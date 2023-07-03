@@ -7,6 +7,7 @@ class BST {
   }
 	// Average: O(Log(n)) time | 0(1) space
 	// Worst: O(n) time | O(1) space 
+  
   insert(value) {
     let currentNode = this;
 		// do this forever until break statement
