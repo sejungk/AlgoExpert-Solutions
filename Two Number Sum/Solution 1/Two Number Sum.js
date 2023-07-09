@@ -5,6 +5,7 @@ function twoNumberSum(array, targetSum) {
       if (sum === targetSum) return [array[i], array[j]];
     }
   }
+  
   return [];
 }
 
