@@ -1,18 +1,18 @@
 function hasSingleCycle(array) {
-  let visited = new Set();
-  let startingPosition = 0;
+  let visited = 0;
+  let startIdx = 0;
   let i = 0;
   
-  while (visited.size !== array.length) {
-    if (array[i] === 0 || visited.has(i)) return false;
-    visited.add(i);
-    i = getNextPosition(i, array);
+  while (visited < array.length) {
+    if (visited !== 0 && i === startIdx) return false;
+    visited++;
+    i = getNextIdx(i, array);
   }
-  return i === startingPosition;
+  return i === startIdx;
 }
 
 
-function getNextPosition(i, array) {
+function getNextIdx(i, array) {
   i = (i + array[i]) % array.length;
   if (i < 0) i = array.length + i;
   return i;
