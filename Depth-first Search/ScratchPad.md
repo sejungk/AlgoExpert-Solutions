@@ -1,7 +1,9 @@
-<pre>1) Add current node to array
+<pre>Approach:
+1) Add current node to array
 2) call dfs method on all children nodes.
 
-Time: O(v + e)     |     Space: O(v)
+Space/Time Complexity:
+Time: O(v + e) || Space: O(v)
 v = number of vertices
 e = number of edges
 
