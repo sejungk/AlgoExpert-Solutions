@@ -4,7 +4,7 @@ function riverSizes(matrix) {
   
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix[0].length; col++) {
-      let size = explore(row, col, matrix, visited, sizes);
+      let size = findRiverSize(row, col, matrix, visited, sizes);
       if (size > 0) sizes.push(size);
     }
   }
@@ -12,17 +12,16 @@ function riverSizes(matrix) {
 }
 
 
-function explore(row, col, matrix, visited, sizes) {
+function findRiverSize(row, col, matrix, visited, sizes) {
   let key = row + ',' + col;
   if (visited.has(key)) return 0;
   visited.add(key);
   if (!inBounds(row, col, matrix) || matrix[row][col] === 0) return 0;
-console.log(row, col)
   let count = 1;
   let deltas =[ [0, 1], [1, 0], [-1, 0], [0, -1] ];
   for (let delta of deltas) {
     const [ deltaRow, deltaCol ] =  delta;
-    count += explore(row + deltaRow, col + deltaCol, matrix, visited, sizes);
+    count += findRiverSize(row + deltaRow, col + deltaCol, matrix, visited, sizes);
   }
   return count;
 }
