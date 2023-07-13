@@ -1,34 +1,20 @@
 function twoColorable(edges) {
-  const colorAssignment = {};
+  // same thing as new Array(edges.length).fill(null);
+  let colors = edges.map(_ => null);
+  colors[0] = true;
+  let stack = [ 0 ];
   
-  for (let node in edges) {
-    if (!(node in colorAssignment)) {
-      if (colorNodes(node, edges, true, colorAssignment) === false) return false;
-    }
-  }
-  return true;
-}
-
-
-function colorNodes(startingNode, edges, startingColor, colorAssignment) {
-  let stack = [ [startingNode, startingColor] ];
-
-
   while (stack.length) {
-    let [ node, color ] = stack.pop();
-    if (node in colorAssignment) {
-      if (colorAssignment[node] !== color) return false;
-      else continue;
-    }
-    colorAssignment[node] = color;
-    for (let child of edges[node]) {
-      stack.push([ child, !color ]);
+    const node = stack.pop();
+    for (let neighbor of edges[node]) {
+      if (colors[neighbor] === null) {
+        colors[neighbor] = !colors[node];
+        stack.push(neighbor);
+      } else if (colors[neighbor] === colors[node]) return false;
     }
   }
   return true;
 }
-
-
 
 
 // Do not edit the line below.
