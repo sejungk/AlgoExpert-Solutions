@@ -1,43 +1,47 @@
+// Time: O(bns)
 function multiStringSearch(bigString, smallStrings) {
-  const suffixTrie = new createTrie(bigString);
-  return smallStrings.map(string => suffixTrie.contains(string));
+  const trie = new Trie();
+  
+  for (const string of smallStrings) {
+    trie.insert(string);
+  }
+  
+  const containedStrings = {};
+  for (let i = 0; i < bigString.length; i++) {
+    findSmallStringIn(bigString, i, trie, containedStrings);
+  }
+  return smallStrings.map(string => string in containedStrings);
 }
 
 
-class createTrie {
-  constructor(string) {
+function findSmallStringIn(string, startIdx, trie, containedStrings) {
+  let currNode = trie.root;
+  for (let i = startIdx; i < string.length; i++) {
+    const currChar = string[i];
+    if (!(currChar in currNode)) break;
+    currNode = currNode[currChar];
+    if (trie.endSymbol in currNode) containedStrings[currNode[trie.endSymbol]] = true;
+  }
+}
+
+
+class Trie {
+  constructor() {
     this.root = {};
-    this.populateTrieWithLetters(string);
+    this.endSymbol = '*';
   }
 
 
-  populateTrieWithLetters(string) {
-    for (let i = 0; i < string.length; i++) {
-      this.addSubstringStartingAt(string, i);
-    }
-  }
-
-
-  addSubstringStartingAt(string, i) {
+  insert(string) {
     let node = this.root;
-    for (let j = i; j < string.length; j++) {
-      let letter = string[j];
+    for (let i = 0; i < string.length; i++) {
+      let letter = string[i];
       if (!(letter in node)) node[letter] = {};
       node = node[letter];
     }
-  }
-  
-  contains(string) {
-    let node = this.root;
-    for (let letter of string) {
-      if (!(letter in node)) return false;
-      node = node[letter];
-    }
-    return true;
+    node[this.endSymbol] = string;
   }
 }
-
-
 
 
 // Do not edit the line below.
