@@ -6,8 +6,8 @@ function boggleBoard(board, words) {
 
 
   const wordsFound = {};
-  // const visited = new Set();
-  const visited = board.map(row => row.map(letter => false));
+  const visited = new Set();
+  // const visited = board.map(row => row.map(letter => false));
   for (let row = 0; row < board.length; row++) {
     for (let col = 0; col < board[0].length; col++) {
       findWords(board, row, col, trie.root, wordsFound, visited);
@@ -18,14 +18,13 @@ function boggleBoard(board, words) {
 
 
 function findWords(board, row, col, node, wordsFound, visited) {
-  // let key = row + ',' + col;
-  // if (visited.has(key)) return;
-  // visited.add(key);
-  if (visited[row][col]) return;
-  
+  let key = row + ',' + col;
+  if (visited.has(key)) return;
+
+
   const letter = board[row][col];
   if (!(letter in node)) return;
-  visited[row][col] = true;
+  visited.add(key);
   node = node[letter];
   if ('*' in node) wordsFound[node['*']] = true;
   const neighborPos = findNeighbors(row, col, board);
@@ -33,7 +32,7 @@ function findWords(board, row, col, node, wordsFound, visited) {
     const [neighborRow, neighborCol] = pos;
     findWords(board, neighborRow, neighborCol, node, wordsFound, visited)
   }
-  visited[row][col] = false;
+   visited.delete(key);
 }
 
 
