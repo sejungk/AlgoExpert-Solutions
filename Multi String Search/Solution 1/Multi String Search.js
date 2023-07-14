@@ -1,32 +1,33 @@
+function multiStringSearch(bigString, smallStrings) {
+  const suffixTrie = new createTrie(bigString);
+  return smallStrings.map(string => suffixTrie.contains(string));
+}
+
+
 class createTrie {
-  constructor(sentence) {
+  constructor(string) {
     this.root = {};
-    this.endSymbol = '*';
-    this.populateTrieWithLetters(sentence);
+    this.populateTrieWithLetters(string);
   }
 
 
-  populateTrieWithLetters(sentence) {
-    const words = sentence.split(" ");
-    for (let word of words) {
-      for (let i = 0; i < word.length; i++) {
-        this.addNodesStartingAt(word, i);
-      }
+  populateTrieWithLetters(string) {
+    for (let i = 0; i < string.length; i++) {
+      this.addSubstringStartingAt(string, i);
     }
   }
 
 
-  addNodesStartingAt(word, i) {
+  addSubstringStartingAt(string, i) {
     let node = this.root;
-    for (let j = i; j < word.length; j++) {
-      let letter = word[j];
+    for (let j = i; j < string.length; j++) {
+      let letter = string[j];
       if (!(letter in node)) node[letter] = {};
       node = node[letter];
     }
-    // node[this.endSymbol] = true;
   }
   
-  search(string) {
+  contains(string) {
     let node = this.root;
     for (let letter of string) {
       if (!(letter in node)) return false;
@@ -37,16 +38,6 @@ class createTrie {
 }
 
 
-function multiStringSearch(bigString, smallStrings) {
-  const trie = new createTrie(bigString);
-  const foundStrings = new Array(smallStrings.length).fill(false);
-  
-  for (let i = 0; i < smallStrings.length; i++) {
-    let word = smallStrings[i];
-    if (trie.search(word) === true) foundStrings[i] = true;
-  }
-  return foundStrings;
-}
 
 
 // Do not edit the line below.
