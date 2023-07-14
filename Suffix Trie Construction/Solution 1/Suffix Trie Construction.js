@@ -36,7 +36,8 @@ class SuffixTrie {
       if (!(letter in node)) return false;
       node = node[letter];
     }
-    return this.endSymbol in node;
+    return node[this.endSymbol] === true;
+    // return this.endSymbol in node;
   }
 }
 
