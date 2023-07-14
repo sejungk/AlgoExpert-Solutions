@@ -2,14 +2,12 @@ class createTrie {
   constructor(sentence) {
     this.root = {};
     this.endSymbol = '*';
-    this.populateTrieWithWords(sentence);
+    this.populateTrieWithLetters(sentence);
   }
 
 
-  populateTrieWithWords(sentence) {
+  populateTrieWithLetters(sentence) {
     const words = sentence.split(" ");
-
-
     for (let word of words) {
       for (let i = 0; i < word.length; i++) {
         this.addNodesStartingAt(word, i);
@@ -25,7 +23,7 @@ class createTrie {
       if (!(letter in node)) node[letter] = {};
       node = node[letter];
     }
-    node[this.endSymbol] = true;
+    // node[this.endSymbol] = true;
   }
   
   search(string) {
@@ -35,7 +33,6 @@ class createTrie {
       node = node[letter];
     }
     return true;
-    // return (this.endSymbol in node);
   }
 }
 
