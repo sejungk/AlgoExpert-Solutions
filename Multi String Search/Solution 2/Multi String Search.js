@@ -1,33 +1,43 @@
 function multiStringSearch(bigString, smallStrings) {
-  return smallStrings.map(smallStrings => isInBigString(bigString, smallStrings))
+  const suffixTrie = new createTrie(bigString);
+  return smallStrings.map(string => suffixTrie.contains(string));
 }
 
 
-function isInBigString(bigString, smallString) {
-  for (let i = 0; i < bigString.length; i++) {
-    if (i + smallString.length > bigString.length) break;
-    if (isInBigStringHelper(bigString, smallString, i)) return true;
+class createTrie {
+  constructor(string) {
+    this.root = {};
+    this.populateTrieWithLetters(string);
   }
-  return false;
-}
 
 
-function isInBigStringHelper(bigString, smallString, startIdx) {
-  let leftBigIdx = startIdx;
-  let rightBigIdx = startIdx + smallString.length - 1;
-  let leftSmallIdx = 0;
-  let rightSmallIdx = smallString.length - 1;
-  while (leftBigIdx <= rightBigIdx) {
-    if (bigString[leftBigIdx] != smallString[leftSmallIdx] || bigString[rightBigIdx] != smallString[rightSmallIdx]) {
-      return false;
+  populateTrieWithLetters(string) {
+    for (let i = 0; i < string.length; i++) {
+      this.addSubstringStartingAt(string, i);
     }
-    leftBigIdx++;
-    leftSmallIdx++;
-    rightBigIdx--;
-    rightSmallIdx--;
   }
-  return true;
+
+
+  addSubstringStartingAt(string, i) {
+    let node = this.root;
+    for (let j = i; j < string.length; j++) {
+      let letter = string[j];
+      if (!(letter in node)) node[letter] = {};
+      node = node[letter];
+    }
+  }
+  
+  contains(string) {
+    let node = this.root;
+    for (let letter of string) {
+      if (!(letter in node)) return false;
+      node = node[letter];
+    }
+    return true;
+  }
 }
+
+
 
 
 // Do not edit the line below.
