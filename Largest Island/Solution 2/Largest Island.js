@@ -13,7 +13,7 @@ function largestIsland(matrix) {
       }
     }
   }
-  return largestIslandCount > 0 ? largestIslandCount : matrix[0].length * matrix.length;
+  return largestIslandCount;
 }
 
 
