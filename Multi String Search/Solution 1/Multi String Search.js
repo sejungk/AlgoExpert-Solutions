@@ -1,45 +1,45 @@
-// Time: O(bns)
 function multiStringSearch(bigString, smallStrings) {
-  const trie = new Trie();
-  
-  for (const string of smallStrings) {
-    trie.insert(string);
+  let array = new Array(smallStrings.length).fill(false);
+  const trie = new Trie(bigString);
+  console.log(trie)
+  for (let i = 0; i < smallStrings.length; i++) {
+    const word = smallStrings[i];
+    if (trie.contains(word)) array[i] = true;
   }
-  
-  const containedStrings = {};
-  for (let i = 0; i < bigString.length; i++) {
-    findSmallStringIn(bigString, i, trie, containedStrings);
-  }
-  return smallStrings.map(string => string in containedStrings);
-}
-
-
-function findSmallStringIn(string, startIdx, trie, containedStrings) {
-  let currNode = trie.root;
-  for (let i = startIdx; i < string.length; i++) {
-    const currChar = string[i];
-    if (!(currChar in currNode)) break;
-    currNode = currNode[currChar];
-    if (trie.endSymbol in currNode) containedStrings[currNode[trie.endSymbol]] = true;
-  }
+  return array;
 }
 
 
 class Trie {
-  constructor() {
+  constructor(string) {
     this.root = {};
-    this.endSymbol = '*';
+    this.insertString(string);
   }
 
 
-  insert(string) {
-    let node = this.root;
+  insertString(string) {
     for (let i = 0; i < string.length; i++) {
-      let letter = string[i];
+      this.insertSubstringStartingAt(string, i);
+    }
+  }
+
+
+  insertSubstringStartingAt(string, i) {
+    let node = this.root;
+    for (let j = i; j < string.length; j++) {
+      const letter = string[j];
       if (!(letter in node)) node[letter] = {};
       node = node[letter];
+    }  
+  }
+  
+  contains(string) {
+    let node = this.root;
+    for (const letter of string) {
+      if (!(letter in node)) return false;
+      node = node[letter];
     }
-    node[this.endSymbol] = string;
+    return true;
   }
 }
 
