@@ -7,11 +7,11 @@ function multiStringSearch(bigString, smallStrings) {
   }
 
 
-  const foundStrings = {};
+  const foundStrings = new Set();
   for (let i = 0; i < bigString.length; i++) {
     findSmallStrings(bigString, i, trie, foundStrings)
   } 
-  return smallStrings.map((word) => foundStrings[word] === true)
+  return smallStrings.map((word) => foundStrings.has(word))
 }
 
 
@@ -22,7 +22,7 @@ function findSmallStrings(bigString, startIdx, trie, foundStrings) {
     let letter = bigString[i];
     if (!(letter in currentNode)) break;
     currentNode = currentNode[letter];
-    if ("*" in currentNode) foundStrings[currentNode["*"]] = true;
+    if ("*" in currentNode) foundStrings.add(currentNode["*"]);
   }
 }
 
