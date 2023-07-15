@@ -4,8 +4,7 @@ function largestIsland(matrix) {
   let largestIslandCount = 0;
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix[0].length; col++) {
-      let pos = matrix[row][col];
-      if (pos === 1) {
+      if (matrix[row][col] === 1) {
         matrix[row][col] = 0;
         const landCount = countPotentialLand(row, col, matrix, new Set());
         largestIslandCount = Math.max(landCount, largestIslandCount);
