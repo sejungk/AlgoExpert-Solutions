@@ -20,8 +20,7 @@ function countPotentialLand(row, col, matrix, visited) {
   const key = row + ',' + col;
   if (visited.has(key)) return 0;
   visited.add(key);
-  if (!inBounds(row, col, matrix)) return 0;
-  if (matrix[row][col] === 1) return 0;
+  if (!inBounds(row, col, matrix) || matrix[row][col] === 1) return 0;
 
 
   let count = 1;
