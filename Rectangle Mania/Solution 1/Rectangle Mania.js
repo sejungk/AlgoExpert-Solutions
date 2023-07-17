@@ -58,8 +58,11 @@ function getCoordDirections(coord1, coord2) {
 
 function getRectangleCount(coords, coordsTable) {
   let rectangleCount = 0;
+  
+  // iterate through all coords and treat each one as a potential bottom left coord
   for (const coord of coords) {
-    // get all rectangle with this coord as the bottom left coord
+    // get all rectangle with this coord as the bottom left coord  
+    // finding all points of rect in clockwise order starting by going up
     rectangleCount += clockwiseCountRectangles(coord, coordsTable, UP, coord);
   }
   return rectangleCount;
@@ -68,14 +71,18 @@ function getRectangleCount(coords, coordsTable) {
 
 function clockwiseCountRectangles(coord, coordsTable, direction, origin) {
   const coordString = coordsToString(coord);
-  // base case when direction is left
+  
+  // base case when direction is left, were at the last coord
   if (direction === LEFT) {
-    // boolean
+    // boolean, where a rect has been found if our origin is in our curr coord's left array
     const rectangleFound = coordsTable[coordString][LEFT].includes(origin);
+    // return 1 if rectangle was found else 0
     return rectangleFound ? 1 : 0;
-  } else {
+  } else { // if were going up, down or right
     let rectangleCount = 0;
+    // get next direction
     const nextDirection = getNextClockwiseDirection(direction);
+    // go through every coord in our current direction and recursively call count rect with next direction
     for (const nextCoord of coordsTable[coordString][direction]) {
       rectangleCount += clockwiseCountRectangles(nextCoord, coordsTable, nextDirection, origin);
     }
@@ -84,6 +91,7 @@ function clockwiseCountRectangles(coord, coordsTable, direction, origin) {
 }
 
 
+// calc next direction
 function getNextClockwiseDirection(direction) {
   if (direction === UP) return RIGHT;
   if (direction === RIGHT) return DOWN;
