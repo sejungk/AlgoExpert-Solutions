@@ -4,6 +4,8 @@ function rectangleMania(coords) {
 } 
 
 
+// n^2 space for this func
+// double for loop through all coords
 function getCoordsTable(coords) {
   const coordsTable = {};
   
@@ -15,8 +17,14 @@ function getCoordsTable(coords) {
       [LEFT]: []
     };
     for (const coord2 of coords) {
-      // this will return up, down, right, or left
+      // returns the direction of this coord2 in respect to coord1 
+      // return up, down, right, left or null
       const coord2Direction = getCoordDirections(coord1, coord2);
+
+
+      // if we found a valid direction, we store it in the correct direction array in our hash
+      //ex. if coord2 is directly above coord1, store coord2 in UP array
+      // we do this for every coord and store in hash
       if (coord2Direction in coord1Directions) coord1Directions[coord2Direction].push(coord2);
     }
     const coord1String = coordsToString(coord1);
@@ -26,6 +34,7 @@ function getCoordsTable(coords) {
 }
 
 
+// checks based on the x, y values the direction of coord2 in relation to coord1
 function getCoordDirections(coord1, coord2) {
   const [x1, y1] = coord1;
   const [x2, y2] = coord2;
@@ -43,7 +52,7 @@ function getCoordDirections(coord1, coord2) {
     }
   }
   // if we dont hit any directions: up, left, right, down, return empty string
-  return '';
+  return null;
 }
 
 
@@ -79,7 +88,7 @@ function getNextClockwiseDirection(direction) {
   if (direction === UP) return RIGHT;
   if (direction === RIGHT) return DOWN;
   if (direction === DOWN) return LEFT;
-  return '';
+  return null;
   // we already handle the case where the curr direction is left and we need to go up
 }
 
