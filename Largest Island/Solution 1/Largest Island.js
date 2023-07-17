@@ -1,41 +1,79 @@
 function largestIsland(matrix) {
-
-
-  let largestIslandCount = 0;
+  let islandId = 2;
+  const islandSizes = {1: 0};
+  
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix[0].length; col++) {
-      if (matrix[row][col] === 1) {
-        matrix[row][col] = 0;
-        const landCount = countPotentialLand(row, col, matrix, new Set());
-        largestIslandCount = Math.max(landCount, largestIslandCount);
-        matrix[row][col] = 1;
+      let countAttempt = explore(row, col, matrix, islandId);
+      if (countAttempt > 0) {
+        islandSizes[islandId] = countAttempt;
+        islandId++;
       }
     }
   }
-  return largestIslandCount;
-}
 
 
+  let max = 0;
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[0].length; col++) {
+    if (matrix[row][col] !== 1) continue;
 
 
-function countPotentialLand(row, col, matrix, visited) {
-  const key = row + ',' + col;
-  if (visited.has(key)) return 0;
-  visited.add(key);
-  if (!inBounds(row, col, matrix) || matrix[row][col] === 1) return 0;
+      const neighborIslands = new Set();
+      const neighbors = getNeighbors(row, col, matrix);
+      for (let neighbor of neighbors) {
+        const [neighborRow, neighborCol] = neighbor;
+        neighborIslands.add(matrix[neighborRow][neighborCol]);
+      }
 
 
-  let count = 1;
-  const neighbors = findNeighbors(row, col, matrix);
-  for (const neighbor of neighbors) {
-    const [neighborRow, neighborCol]  = neighbor;
-    count += countPotentialLand(neighborRow, neighborCol, matrix, visited);
+      let currCount = 1;
+      for (let island of neighborIslands) {
+        currCount += islandSizes[island];
+      }
+
+
+      max = Math.max(currCount, max);
+    }
   }
-  return count; 
+  return max;
 }
 
 
-function findNeighbors(row, col, matrix) {
-  const validNeighborPos = [];
+function explore(row, col, matrix, islandId) {
+  if (!inBounds(row, col, matrix) || matrix[row][col] !== 0) return 0;
+
+
+  matrix[row][col] = islandId;
+  let count = 1;
+  const neighbors = getNeighbors(row, col, matrix);
+  for (let neighbor of neighbors) {
+    const [neighborRow, neighborCol] = neighbor;
+    count += explore(neighborRow, neighborCol, matrix, islandId);
+  }
+  return count;
+}
+
+
+function getNeighbors(row, col, matrix) {
   const neighbors = [ [0, 1], [1, 0], [-1, 0], [0, -1] ];
-  for (let neighbor of neighbors){
+  const validNeighbors = [];
+  
+  for (let neighbor of neighbors) {
+    const [neighborRow, neighborCol] = neighbor;
+    const newRow = neighborRow + row;
+    const newCol = neighborCol + col;
+    if (inBounds(newRow, newCol, matrix)) validNeighbors.push([newRow, newCol]);
+  }
+  return validNeighbors;
+}
+
+
+function inBounds(row, col, matrix) {
+  const rowInBounds = row >= 0 && row < matrix.length;
+  const colInBounds = col >= 0 && col < matrix[0].length;
+  return rowInBounds && colInBounds;
+}
+// Do not edit the line below.
+exports.largestIsland = largestIsland;
+
